@@ -262,7 +262,6 @@ const char* const header_table[] PROGMEM = {  header_0,\
                                               header_87,\
                                               header_88,\
                                               header_89,\
-                                              /*
                                               header_90,\
                                               header_91,\
                                               header_92,\
