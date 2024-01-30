@@ -883,7 +883,7 @@ extern void beginInjectorPriming(void)
   if( (primingValue > 0) && (currentStatus.TPS < configPage4.floodClear) )
   {
     primingValue = primingValue * 1000 / PRIMINGPULSETABLE_VALUE_SCALE; //value in TS is in mS and scaled by 0.5 when stored. Need to convert to uS then divide by 2 to account for scale
-    if ( maxInjOutputs >= 1 ) { setFuelSchedule1(100, primingValue); }
+    setFuelSchedule1(100, primingValue);
 #if (INJ_CHANNELS >= 2)
     if ( BIT_CHECK(channelInjEnabled, INJ2_CMD_BIT) == true ) { setFuelSchedule2(100, primingValue); }
 #endif
