@@ -171,14 +171,14 @@ byte getTSLogEntry(uint16_t byteNum)
     case 124: statusValue = currentStatus.airConStatus; break;
     case 125: statusValue = lowByte(currentStatus.actualDwell); break;
     case 126: statusValue = highByte(currentStatus.actualDwell); break;
-    case 127: statusValue = lowByte(currentStatus.wueCorrection2); break;
-    case 128: statusValue = highByte(currentStatus.wueCorrection2); break;
-    case 129: statusValue = lowByte(currentStatus.wueCorrection); break;
-    case 130: statusValue = highByte(currentStatus.wueCorrection); break;
-    case 131: statusValue = lowByte(currentStatus.ASEValue2); break;
-    case 132: statusValue = highByte(currentStatus.ASEValue2); break;
-    case 133: statusValue = lowByte(currentStatus.ASEValue); break;
-    case 134: statusValue = highByte(currentStatus.ASEValue); break;
+    // case 127: statusValue = lowByte(currentStatus.wueCorrection2); break;
+    // case 128: statusValue = highByte(currentStatus.wueCorrection2); break;
+    // case 129: statusValue = lowByte(currentStatus.wueCorrection); break;
+    // case 130: statusValue = highByte(currentStatus.wueCorrection); break;
+    // case 131: statusValue = lowByte(currentStatus.ASEValue2); break;
+    // case 132: statusValue = highByte(currentStatus.ASEValue2); break;
+    // case 133: statusValue = lowByte(currentStatus.ASEValue); break;
+    // case 134: statusValue = highByte(currentStatus.ASEValue); break;
   }
 
   return statusValue;
