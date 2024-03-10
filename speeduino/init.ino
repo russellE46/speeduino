@@ -166,6 +166,11 @@ void initialiseAll(void)
     PrimingPulseTable2.xSize = 4;
     PrimingPulseTable2.values = configPage15.primePulse2;
     PrimingPulseTable2.axisX = configPage2.primeBins;
+    CLTBoostLimitTable.valueSize = SIZE_BYTE;
+    CLTBoostLimitTable.axisSize = SIZE_BYTE;
+    CLTBoostLimitTable.xSize = 6;
+    CLTBoostLimitTable.values = configPage15.CLTBoostLimits;
+    CLTBoostLimitTable.axisX = configPage9.coolantProtTemp;
     crankingEnrichTable.valueSize = SIZE_BYTE;
     crankingEnrichTable.axisSize = SIZE_BYTE;
     crankingEnrichTable.xSize = 4;
@@ -241,7 +246,7 @@ void initialiseAll(void)
     flexBoostTable.valueSize = SIZE_INT;
     flexBoostTable.axisSize = SIZE_BYTE; //Set this table to use byte axis bins (NOTE THIS IS DIFFERENT TO THE VALUES!!)
     flexBoostTable.xSize = 6;
-    flexBoostTable.values = configPage10.flexBoostBias;
+    flexBoostTable.values = configPage10.flexBoostAdj;
     flexBoostTable.axisX = configPage10.flexBoostBins;
     fuelTempTable.valueSize = SIZE_BYTE;
     fuelTempTable.axisSize = SIZE_BYTE; //Set this table to use byte axis bins
