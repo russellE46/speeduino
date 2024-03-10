@@ -1498,9 +1498,16 @@ struct config15 {
   byte primePulse2[4]; //Priming pulsewidth values (mS, copied to @ref PrimingPulseTable2)
   byte CLTBoostLimits[6];
   byte CLTBoostCutEnabled : 1;
+  byte unused15_134_1 : 1;
+  byte unused15_134_2 : 1;
+  byte unused15_134_3 : 1;
+  byte unused15_134_4 : 1;
+  byte unused15_134_5 : 1;
+  byte unused15_134_6 : 1;
+  byte unused15_134_7 : 1;
 
   //Bytes 128-255
-  byte Unused15_128_255[127];
+  byte Unused15_135_255[121];
   
 
 #if defined(CORE_AVR)
