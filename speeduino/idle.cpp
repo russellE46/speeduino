@@ -493,6 +493,10 @@ void idleControl(void)
         {
           //Engine is not running or cranking, but the run before crank flag is set. Use the cranking table
           currentStatus.idleLoad = table2D_getValue(&iacCrankDutyTable, currentStatus.coolant + CALIBRATION_TEMPERATURE_OFFSET); //All temps are offset by 40 degrees
+          if (BIT_CHECK(currentStatus.status4, BIT_STATUS4_FAN))
+          {
+            currentStatus.idleLoad += configPage15.iacPWMfanUp;
+          }
           idleTaper = 0;
         }
       }

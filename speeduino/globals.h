@@ -1442,7 +1442,11 @@ struct config15 {
   byte rollingProtCutPercent[4];
   
   //Bytes 106-255
-  byte Unused15_106_255[150];
+  byte Unused15_106_133[27];
+  byte Unused15_134_1 : 3;
+  byte iacPWMfanUp : 3;
+  byte Unused15_134_2 : 2;
+  byte Unused15_135_255[120];
 
 #if defined(CORE_AVR)
   };
