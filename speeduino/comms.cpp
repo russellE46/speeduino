@@ -31,7 +31,7 @@ A full copy of the license may be found in the projects root directory
 
 // Forward declarations
 
-/** @brief Processes a message once it has been fully received */
+/** @brief Processes a message once it has been fully recieved */
 void processSerialCommand(void);
 
 /** @brief Should be called when ::serialStatusFlag == SERIAL_TRANSMIT_TOOTH_INPROGRESS, */
@@ -63,10 +63,10 @@ void sendCompositeLog(void);
  */
 constexpr byte serialVersion[] PROGMEM = {SERIAL_RC_OK, '0', '0', '2'};
 constexpr byte canId[] PROGMEM = {SERIAL_RC_OK, 0};
-constexpr byte codeVersion[] PROGMEM = { SERIAL_RC_OK, 's','p','e','e','d','u','i','n','o',' ','2','0','2','4','0','5','-','d','e','v'} ; //Note no null terminator in array and statu variable at the start
-constexpr byte productString[] PROGMEM = { SERIAL_RC_OK, 'S', 'p', 'e', 'e', 'd', 'u', 'i', 'n', 'o', ' ', '2', '0', '2', '4', '.', '0', '5', '-', 'd', 'e', 'v'};
-//constexpr byte codeVersion[] PROGMEM = { SERIAL_RC_OK, 's','p','e','e','d','u','i','n','o',' ','2','0','2','4','0','2'} ; //Note no null terminator in array and statu variable at the start
-//constexpr byte productString[] PROGMEM = { SERIAL_RC_OK, 'S', 'p', 'e', 'e', 'd', 'u', 'i', 'n', 'o', ' ', '2', '0', '2', '4', '.', '0', '2'};
+//constexpr byte codeVersion[] PROGMEM = { SERIAL_RC_OK, 's','p','e','e','d','u','i','n','o',' ','2','0','2','3','1','1','-','d','e','v'} ; //Note no null terminator in array and statu variable at the start
+//constexpr byte productString[] PROGMEM = { SERIAL_RC_OK, 'S', 'p', 'e', 'e', 'd', 'u', 'i', 'n', 'o', ' ', '2', '0', '2', '3', '.', '1', '1', '-', 'd', 'e', 'v'};
+constexpr byte codeVersion[] PROGMEM = { SERIAL_RC_OK, 's','p','e','e','d','u','i','n','o',' ','2','0','2','4','0','2'} ; //Note no null terminator in array and statu variable at the start
+constexpr byte productString[] PROGMEM = { SERIAL_RC_OK, 'S', 'p', 'e', 'e', 'd', 'u', 'i', 'n', 'o', ' ', '2', '0', '2', '4', '.', '0', '2'};
 constexpr byte testCommsResponse[] PROGMEM = { SERIAL_RC_OK, 255 };
 //!@}
 
@@ -104,7 +104,7 @@ static inline bool isTimeout(void) {
   return (millis() - serialReceiveStartTime) > SERIAL_TIMEOUT;
 }
 
-// ====================================== Endianness Support =============================
+// ====================================== Endianess Support =============================
 
 /**
  * @brief      Flush all remaining bytes from the rx serial buffer
@@ -392,7 +392,7 @@ static void loadO2CalibrationChunk(uint16_t offset, uint16_t chunkSize)
 }
 
 /**
- * @brief Convert 2 bytes into an offset temperature in degrees Celsius
+ * @brief Convert 2 bytes into an offset temperature in degrees Celcius
  * @attention Returned value will be offset CALIBRATION_TEMPERATURE_OFFSET
  */
 static uint16_t toTemperature(byte lo, byte hi)
@@ -438,7 +438,7 @@ static void processTemperatureCalibrationTableUpdate(uint16_t calibrationLength,
 /** Processes the incoming data on the serial buffer based on the command sent.
 Can be either data for a new command or a continuation of data for command that is already in progress:
 
-Commands are single byte (letter symbol) commands.
+Comands are single byte (letter symbol) commands.
 */
 void serialReceive(void)
 {

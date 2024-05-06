@@ -622,8 +622,8 @@ void legacySerialHandler(byte cmd, Stream &targetPort, SerialStatus &targetStatu
       break;
 
     case 'Q': // send code version
-      //targetPort.print(F("speeduino 202402"));
-      targetPort.print(F("speeduino 202405-dev"));
+      targetPort.print(F("speeduino 202402"));
+      //targetPort.print(F("speeduino 202310"));
       break;
 
     case 'r': //New format for the optimised OutputChannels
@@ -655,7 +655,7 @@ void legacySerialHandler(byte cmd, Stream &targetPort, SerialStatus &targetStatu
       break;
 
     case 'S': // send code version
-      targetPort.print(F("Speeduino 2024.05-dev"));
+      targetPort.print(F("Speeduino 2024.02"));
       break;
   }
 }
@@ -842,7 +842,7 @@ void sendValuesLegacy(void)
   bytestosend -= Serial.write(temp >> 8); // MAPdot
   bytestosend -= Serial.write(temp); // MAPdot
 
-  temp = currentStatus.dwell * 10U;
+  temp = currentStatus.dwell * 10;
   bytestosend -= Serial.write(temp>>8); // dwell
   bytestosend -= Serial.write(temp); // dwell
 

@@ -144,11 +144,8 @@ void loop(void)
       currentStatus.longRPM = getRPM(); //Long RPM is included here
       currentStatus.RPM = currentStatus.longRPM;
       currentStatus.RPMdiv100 = div100(currentStatus.RPM);
-      if(currentStatus.RPM > 0)
-      {
-        FUEL_PUMP_ON();
-        currentStatus.fuelPumpOn = true;
-      }
+      FUEL_PUMP_ON();
+      currentStatus.fuelPumpOn = true; //Not sure if this is needed.
     }
     else
     {
@@ -719,23 +716,24 @@ void loop(void)
       //Set dwell
       //Dwell is stored as ms * 10. ie Dwell of 4.3ms would be 43 in configPage4. This number therefore needs to be multiplied by 100 to get dwell in uS
       if ( BIT_CHECK(currentStatus.engine, BIT_ENGINE_CRANK) ) {
-        currentStatus.dwell =  (configPage4.dwellCrank * 100U); //use cranking dwell
+        currentStatus.dwell =  (configPage4.dwellCrank * 100); //use cranking dwell
       }
       else 
       {
         if ( configPage2.useDwellMap == true )
         {
-          currentStatus.dwell = (get3DTableValue(&dwellTable, currentStatus.ignLoad, currentStatus.RPM) * 100U); //use running dwell from map
+          currentStatus.dwell = (get3DTableValue(&dwellTable, currentStatus.ignLoad, currentStatus.RPM) * 100); //use running dwell from map
         }
         else
         {
-          currentStatus.dwell =  (configPage4.dwellRun * 100U); //use fixed running dwell
+          currentStatus.dwell =  (configPage4.dwellRun * 100); //use fixed running dwell
         }
       }
       currentStatus.dwell = correctionsDwell(currentStatus.dwell);
 
-      // Convert the dwell time to dwell angle based on the current engine speed
-      calculateIgnitionAngles(timeToAngleDegPerMicroSec(currentStatus.dwell));
+      int dwellAngle = timeToAngleDegPerMicroSec(currentStatus.dwell); //Convert the dwell time to dwell angle based on the current engine speed
+
+      calculateIgnitionAngles(dwellAngle);
 
       //If ignition timing is being tracked per tooth, perform the calcs to get the end teeth
       //This only needs to be run if the advance figure has changed, otherwise the end teeth will still be the same
@@ -745,7 +743,7 @@ void loop(void)
       //***********************************************************************************************
       //| BEGIN FUEL SCHEDULES
       //Finally calculate the time (uS) until we reach the firing angles and set the schedules
-      //We only need to set the schedule if we're BEFORE the open angle
+      //We only need to set the shcedule if we're BEFORE the open angle
       //This may potentially be called a number of times as we get closer and closer to the opening time
 
       //Determine the current crank angle
@@ -1325,8 +1323,10 @@ byte getAdvance1(void)
  * both start and end angles are calculated for each channel.
  * Also the mode of ignition firing - wasted spark vs. dedicated spark per cyl. - is considered here.
  */
-void calculateIgnitionAngles(uint16_t dwellAngle)
+void calculateIgnitionAngles(int dwellAngle)
 {
+  
+
   //This test for more cylinders and do the same thing
   switch (configPage2.nCylinders)
   {
@@ -1558,7 +1558,7 @@ void calculateStaging(uint32_t pwLimit)
             currentStatus.PW4 = currentStatus.PW1;
           #else
             //This is an invalid config as there are not enough outputs to support sequential + staging
-            //Put the staging output to the non-existent channel 5
+            //Put the staging output to the non-existant channel 5
             currentStatus.PW5 = currentStatus.PW2;
           #endif
         }
